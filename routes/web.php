@@ -25,7 +25,7 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name
 Route::middleware('auth')->group(function () {
     // Dashboard (substitua pela rota correta, se necessário)
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('dashboard'); 
     })->name('dashboard');
 
     // Gerenciamento de perguntas (questions)
