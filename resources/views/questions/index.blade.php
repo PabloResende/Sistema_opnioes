@@ -1,43 +1,45 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <h1 class="mb-4 text-dark">Seja bem-vindo(a)</h1>
-        <p class="text-secondary mb-4">Comece o trabalho realizando os seguintes atos simples:</p>
+<div class="container mt-5">
+    <h2 class="mb-4">Criar Perguntas</h2>
 
-        <div class="row g-4">
-            <!-- Botão: Criar Interrogatório -->
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Crie o Questionário</h5>
-                        <p class="card-text text-muted">Crie um novo questionário para coletar opiniões.</p>
-                        <a href="{{ route('questions.create') }}" class="btn btn-primary">Acessar</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Botão: Adicionar Dispositivo -->
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Adicione o Dispositivo</h5>
-                        <p class="card-text text-muted">Conecte dispositivos ao sistema para coletar dados.</p>
-                        <a href="{{ route('add.device') }}" class="btn btn-primary">Acessar</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Botão: Baixar App -->
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Baixar App</h5>
-                        <p class="card-text text-muted">Baixe o aplicativo para gerenciar suas informações.</p>
-                        <a href="{{ route('download.app') }}" class="btn btn-primary">Acessar</a>
-                    </div>
-                </div>
-            </div>
+    <!-- Exibir mensagens de sucesso -->
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
         </div>
-    </div>
+    @endif
+
+    <!-- Formulário para criar perguntas -->
+    <form action="{{ route('questions.store') }}" method="POST" class="mb-4">
+        @csrf
+        <div class="mb-3">
+            <label for="title" class="form-label">Título da Pergunta</label>
+            <input type="text" name="title" id="title" class="form-control" placeholder="Digite a pergunta" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Descrição (Opcional)</label>
+            <textarea name="description" id="description" class="form-control" rows="3" placeholder="Digite uma descrição"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Criar Pergunta</button>
+    </form>
+
+    <!-- Lista de perguntas -->
+    <h3>Perguntas Criadas</h3>
+    @if ($questions->isEmpty())
+        <p class="text-muted">Nenhuma pergunta criada ainda.</p>
+    @else
+        <ul class="list-group">
+            @foreach ($questions as $question)
+                <li class="list-group-item">
+                    <strong>{{ $question->title }}</strong>
+                    @if ($question->description)
+                        <p class="text-muted mb-0">{{ $question->description }}</p>
+                    @endif
+                </li>
+            @endforeach
+        </ul>
+    @endif
+</div>
 @endsection

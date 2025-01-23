@@ -9,6 +9,7 @@ use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\SurveyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,15 +31,17 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name
 Route::middleware('auth')->group(function () {
 
     // Dashboard
-    Route::get('/dashboard', [QuestionController::class, 'index'])->name('dashboard');  
+    Route::get('/dashboard', [QuestionController::class, 'index'])->name('dashboard');
 
     // Gerenciamento de perguntas
-    Route::resource('questions', QuestionController::class);
+    Route::resource('questions', QuestionController::class)->except(['show']);
 
     // Perfil do usuário
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    });
 
     // Estatísticas
     Route::get('/statistics', [StatisticsController::class, 'index'])->name('statistics');
@@ -50,9 +53,24 @@ Route::middleware('auth')->group(function () {
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
 
     // Dispositivos
-    Route::get('/devices/create', [DeviceController::class, 'create'])->name('devices.create');
-    Route::get('/devices/add', [DeviceController::class, 'create'])->name('add.device');
+    Route::prefix('devices')->group(function () {
+        Route::get('/create', [DeviceController::class, 'create'])->name('devices.create');
+        Route::get('/add', [DeviceController::class, 'create'])->name('add.device');
+    });
 
     // Download do app
     Route::get('/app/download', [AppController::class, 'download'])->name('download.app');
+
+    // Gerenciamento de enquetes e respostas
+    Route::prefix('questions')->group(function () {
+        Route::get('/create', [QuestionController::class, 'create'])->name('questions.create');
+        Route::post('/', [QuestionController::class, 'store'])->name('questions.store');
+        Route::get('/link', [QuestionController::class, 'link'])->name('questions.link');
+    });
+
+    // Responder às perguntas
+    Route::prefix('survey')->group(function () {
+        Route::get('/{id}', [SurveyController::class, 'show'])->name('survey.show');
+        Route::post('/{id}', [SurveyController::class, 'store'])->name('survey.store');
+    });
 });
