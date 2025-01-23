@@ -3,43 +3,50 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Sistema de Opiniões') }}</title>
 
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJv+8BfO9o8b6R+q5WgLS6gxw6JNjItL6e09eO+6p0IMt2gFf/jmJcF6wCVK" crossorigin="anonymous">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="d-flex flex-column min-vh-100">
-
+<body class="d-flex">
     <!-- Sidebar -->
-    <div class="d-flex" id="wrapper">
-        <div class="bg-dark text-white" id="sidebar-wrapper">
-            <div class="sidebar-heading text-center py-4">
-                <h4>Logo</h4>
-            </div>
-            <div class="list-group list-group-flush">
-                <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action bg-dark text-white">Dashboard</a>
-                <a href="{{ route('questions.index') }}" class="list-group-item list-group-item-action bg-dark text-white">Perguntas</a>
-                <a href="{{ route('statistics') }}" class="list-group-item list-group-item-action bg-dark text-white">Estatísticas</a>
-                <a href="{{ route('responses') }}" class="list-group-item list-group-item-action bg-dark text-white">Respostas</a>
-                <a href="{{ route('notifications') }}" class="list-group-item list-group-item-action bg-dark text-white">Notificações</a>
-                <a href="{{ route('logout') }}" class="list-group-item list-group-item-action bg-dark text-white">Sair</a>
-            </div>
-        </div>
+    <nav class="d-flex flex-column bg-dark text-white p-3 vh-100" style="width: 250px;">
+        <h4 class="text-center">Menu</h4>
+        <ul class="nav flex-column">
+            <li class="nav-item my-2">
+                <a href="{{ route('dashboard') }}" class="nav-link text-white"><i class="bi bi-house me-2"></i> Home</a>
+            </li>
+            <li class="nav-item my-2">
+                <a href="{{ route('questions.index') }}" class="nav-link text-white"><i class="bi bi-question-circle me-2"></i> Perguntas</a>
+            </li>
+            <li class="nav-item my-2">
+                <a href="{{ route('statistics') }}" class="nav-link text-white"><i class="bi bi-bar-chart me-2"></i> Estatísticas</a>
+            </li>
+            <li class="nav-item my-2">
+                <a href="{{ route('responses') }}" class="nav-link text-white"><i class="bi bi-chat-left-text me-2"></i> Respostas</a>
+            </li>
+            <li class="nav-item my-2">
+                <a href="{{ route('notifications') }}" class="nav-link text-white"><i class="bi bi-bell me-2"></i> Notificações</a>
+            </li>
+            <li class="nav-item my-2">
+                <a href="{{ route('add.device') }}" class="nav-link text-white"><i class="bi bi-device-hdd me-2"></i> Dispositivos</a>
+            </li>
+            <li class="nav-item my-2">
+                <a href="{{ route('download.app') }}" class="nav-link text-white"><i class="bi bi-download me-2"></i> Baixar App</a>
+            </li>
+        </ul>
+    </nav>
 
-        <!-- Page Content -->
-        <div id="page-content-wrapper" class="w-100">
-            <div class="container-fluid">
-                @yield('content')
-            </div>
-        </div>
+    <!-- Main Content -->
+    <div class="flex-grow-1 p-4 bg-light">
+        @yield('content')
     </div>
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0duU1-4kqK39zCj8EJ8n2xxfE64zj4mwFhe0k4kCfcFgPR0f" crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

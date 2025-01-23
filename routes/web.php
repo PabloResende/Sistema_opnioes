@@ -53,7 +53,7 @@ Route::middleware('auth')->group(function () {
 
     // Dispositivos
     Route::get('/devices/create', [DeviceController::class, 'create'])->name('devices.create');
-    Route::get('/devices/add', [DeviceController::class, 'create'])->name('add.device'); // Nome mantido conforme pedido
+    Route::get('/devices/add', [DeviceController::class, 'create'])->name('add.device');
 
     // Download do app
     Route::get('/app/download', [AppController::class, 'download'])->name('download.app');
