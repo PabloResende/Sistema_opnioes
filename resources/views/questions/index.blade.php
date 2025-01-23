@@ -25,21 +25,32 @@
         <button type="submit" class="btn btn-primary">Criar Pergunta</button>
     </form>
 
-    <!-- Lista de perguntas -->
-    <h3>Perguntas Criadas</h3>
-    @if ($questions->isEmpty())
-        <p class="text-muted">Nenhuma pergunta criada ainda.</p>
-    @else
-        <ul class="list-group">
-            @foreach ($questions as $question)
-                <li class="list-group-item">
+<h3>Perguntas Criadas</h3>
+@if ($questions->isEmpty())
+    <p class="text-muted">Nenhuma pergunta criada ainda.</p>
+@else
+    <ul class="list-group">
+        @foreach ($questions as $question)
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
                     <strong>{{ $question->title }}</strong>
                     @if ($question->description)
                         <p class="text-muted mb-0">{{ $question->description }}</p>
                     @endif
-                </li>
-            @endforeach
-        </ul>
-    @endif
+                </div>
+                <div>
+                    <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-sm btn-warning me-2">Editar</a>
+                    <form action="{{ route('questions.destroy', $question->id) }}" method="POST" class="d-inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir esta pergunta?')">Excluir</button>
+                    </form>
+                </div>
+            </li>
+        @endforeach
+    </ul>
+@endif
+
+
 </div>
 @endsection

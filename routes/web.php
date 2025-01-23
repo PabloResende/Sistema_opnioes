@@ -18,13 +18,13 @@ use App\Http\Controllers\SurveyController;
 */
 
 // Rota inicial redirecionando para a página de login
-Route::get('/', function () {
-    return redirect('/login');
-});
+Route::get('/', fn() => redirect('/login'));
 
 // Rotas de autenticação
-Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
-Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+Route::prefix('login')->group(function () {
+    Route::get('/', [AuthenticatedSessionController::class, 'create'])->name('login');
+    Route::post('/', [AuthenticatedSessionController::class, 'store']);
+});
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 // Rotas protegidas pelo middleware "auth"
@@ -61,10 +61,8 @@ Route::middleware('auth')->group(function () {
     // Download do app
     Route::get('/app/download', [AppController::class, 'download'])->name('download.app');
 
-    // Gerenciamento de enquetes e respostas
+    // Gerenciamento de enquetes e link para compartilhamento
     Route::prefix('questions')->group(function () {
-        Route::get('/create', [QuestionController::class, 'create'])->name('questions.create');
-        Route::post('/', [QuestionController::class, 'store'])->name('questions.store');
         Route::get('/link', [QuestionController::class, 'link'])->name('questions.link');
     });
 
