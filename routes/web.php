@@ -30,9 +30,7 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name
 Route::middleware('auth')->group(function () {
 
     // Dashboard
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [QuestionController::class, 'index'])->name('dashboard');  
 
     // Gerenciamento de perguntas
     Route::resource('questions', QuestionController::class);

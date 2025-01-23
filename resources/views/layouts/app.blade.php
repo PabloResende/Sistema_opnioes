@@ -22,7 +22,7 @@
                     <a href="{{ route('dashboard') }}" class="nav-link text-white"><i class="bi bi-house me-2"></i> Home</a>
                 </li>
                 <li class="nav-item my-2">
-                    <a href="{{ route('questions.index') }}" class="nav-link text-white"><i class="bi bi-question-circle me-2"></i> Perguntas</a>
+                    <a href="{{ route('questions.create') }}" class="nav-link text-white"><i class="bi bi-question-circle me-2"></i> Perguntas</a>
                 </li>
                 <li class="nav-item my-2">
                     <a href="{{ route('statistics') }}" class="nav-link text-white"><i class="bi bi-bar-chart me-2"></i> Estatísticas</a>
