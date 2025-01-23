@@ -10,7 +10,8 @@ class QuestionController extends Controller
     // Formulário para criar perguntas
     public function create()
     {
-        return view('questions.create');
+        $questions = Question::all();
+        return view('questions.create', compact('questions'));
     }
 
     // Armazenar perguntas no banco
@@ -26,7 +27,7 @@ class QuestionController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('questions.index')->with('success', 'Pergunta criada com sucesso!');
+        return redirect()->route('questions.create')->with('success', 'Pergunta criada com sucesso!');
     }
 
     public function link()
@@ -37,8 +38,7 @@ class QuestionController extends Controller
         }
     public function index()
         {
-            $questions = Question::all();
-            return view('questions.index', compact('questions'));
+            return view('index');
         }
 
     public function edit($id)
@@ -60,7 +60,7 @@ class QuestionController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('questions.index')->with('success', 'Pergunta atualizada com sucesso!');
+        return redirect()->route('questions.create')->with('success', 'Pergunta atualizada com sucesso!');
     }
 
     public function destroy($id)
@@ -68,7 +68,7 @@ class QuestionController extends Controller
         $question = Question::findOrFail($id);
         $question->delete();
 
-        return redirect()->route('questions.index')->with('success', 'Pergunta excluída com sucesso!');
+        return redirect()->route('questions.create')->with('success', 'Pergunta excluída com sucesso!');
     }
 
 }

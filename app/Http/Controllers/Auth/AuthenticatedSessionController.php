@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
 
         if (Auth::attempt(['name' => $request->name, 'password' => $request->password])) {
             $request->session()->regenerate();
-            return redirect()->intended(route('questions.index'));
+            return redirect()->route('dashboard');
         }
 
         return back()->withErrors([
