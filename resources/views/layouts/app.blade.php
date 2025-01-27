@@ -22,22 +22,19 @@
                     <a href="{{ route('dashboard') }}" class="nav-link text-white"><i class="bi bi-house me-2"></i> Home</a>
                 </li>
                 <li class="nav-item my-2">
-                    <a href="{{ route('questions.create') }}" class="nav-link text-white"><i class="bi bi-question-circle me-2"></i> Perguntas</a>
+                    <a href="{{ route('questions.create') }}" class="nav-link text-white"><i class="bi bi-question-circle me-2"></i> Perguntas (teste)</a>
                 </li>
                 <li class="nav-item my-2">
-                    <a href="{{ route('statistics') }}" class="nav-link text-white"><i class="bi bi-bar-chart me-2"></i> Estatísticas</a>
+                    <a href="{{ route('statistics') }}" class="nav-link text-white"><i class="bi bi-bar-chart me-2"></i> Estatísticas (não está pronto)</a>
                 </li>
                 <li class="nav-item my-2">
-                    <a href="{{ route('responses') }}" class="nav-link text-white"><i class="bi bi-chat-left-text me-2"></i> Respostas</a>
+                    <a href="{{ route('responses') }}" class="nav-link text-white"><i class="bi bi-chat-left-text me-2"></i> Respostas (não esta pronto)</a>
                 </li>
                 <li class="nav-item my-2">
-                    <a href="{{ route('notifications') }}" class="nav-link text-white"><i class="bi bi-bell me-2"></i> Notificações</a>
+                    <a href="{{ route('notifications') }}" class="nav-link text-white"><i class="bi bi-bell me-2"></i> Notificações (não está pronto)</a>
                 </li>
                 <li class="nav-item my-2">
-                    <a href="{{ route('add.device') }}" class="nav-link text-white"><i class="bi bi-device-hdd me-2"></i> Dispositivos</a>
-                </li>
-                <li class="nav-item my-2">
-                    <a href="{{ route('download.app') }}" class="nav-link text-white"><i class="bi bi-download me-2"></i> Baixar App</a>
+                    <a href="{{ route('download.app') }}" class="nav-link text-white"><i class="bi bi-download me-2"></i> Baixar App (não está pronto)</a>
                 </li>
             </ul>
         </nav>
