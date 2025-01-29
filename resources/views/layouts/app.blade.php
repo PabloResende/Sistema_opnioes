@@ -13,7 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body class="d-flex">
-    @if (!Route::is('login')) <!-- Verifica se a rota não é a de login -->
+    @if (!Route::is('login','register')) <!-- Verifica se a rota não é a de login -->
         <!-- Sidebar -->
         <nav class="d-flex flex-column bg-dark text-white p-3 vh-100" style="width: 250px;">
             <h4 class="text-center">Menu</h4>

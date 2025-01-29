@@ -3,7 +3,7 @@
 @section('content')
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card shadow-sm p-4" style="width: 100%; max-width: 400px;">
-            <h3 class="text-center mb-4">Logi</h3>
+            <h3 class="text-center mb-4">Login</h3>
 
             <!-- Exibição de Status da Sessão -->
             @if (session('status'))

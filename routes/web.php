@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\ResponseController;
@@ -26,6 +27,18 @@ Route::prefix('login')->group(function () {
     Route::post('/', [AuthenticatedSessionController::class, 'store']);
 });
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+// Rotas de Registro
+Route::middleware('guest')->group(function () {
+    Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+    Route::post('/register', [RegisteredUserController::class, 'store']);
+});
+
+// Rotas de Recuperação de Senha
+if (Route::has('password.request')) {
+    Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
+    Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
+}
 
 // Rotas protegidas pelo middleware "auth"
 Route::middleware('auth')->group(function () {
