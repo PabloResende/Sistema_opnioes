@@ -10,7 +10,7 @@ class QuestionController extends Controller
 {
     public function create()
     {
-        $questions = Question::all();
+        $questions = Question::with('responses')->get();
         return view('questions.create', compact('questions'));
     }
 
