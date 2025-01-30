@@ -40,7 +40,7 @@
         <div class="list-group">
             @foreach ($questions as $question)
                 <div class="list-group-item">
-                    <div class="d-flex justify-content-between">
+                   <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <strong>{{ $question->title }}</strong>
                             @if ($question->description)
@@ -48,7 +48,7 @@
                             @endif
                         </div>
                         <div class="d-flex">
-                            <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-sm btn-warning me-3">Editar</a>
+                            <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-sm btn-warning me-3" style="min-width: 80px;">Editar</a>
                             <form action="{{ route('questions.destroy', $question->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
@@ -56,7 +56,6 @@
                             </form>
                         </div>
                     </div>
-
                     {{-- Exibe as respostas --}}
                     @if ($question->responses->isNotEmpty())
                         <div class="mt-3">
