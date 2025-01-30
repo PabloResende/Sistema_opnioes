@@ -43,7 +43,7 @@
 </head>
 <body>
 
-    @if (!Route::is('login','register')) <!-- Verifica se a rota não é a de login -->
+    @if (!Route::is('login','register'))
         <!-- Sidebar -->
         <nav class="sidebar">
             <h4 class="text-center">Menu</h4>
