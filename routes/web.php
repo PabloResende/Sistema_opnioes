@@ -6,7 +6,6 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\StatisticsController;
-use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\AppController;
@@ -44,7 +43,7 @@ if (Route::has('password.request')) {
 Route::middleware('auth')->group(function () {
 
     // Dashboard
-    Route::get('/dashboard', [QuestionController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [QuestionController::class, 'create'])->name('dashboard');
 
     // Gerenciamento de perguntas
     Route::resource('questions', QuestionController::class)->except(['show']);
@@ -58,9 +57,6 @@ Route::middleware('auth')->group(function () {
 
     // Estatísticas
     Route::get('/statistics', [StatisticsController::class, 'index'])->name('statistics');
-
-    // Respostas
-    Route::get('/responses', [ResponseController::class, 'index'])->name('responses');
 
     // Notificações
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
@@ -79,9 +75,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/link', [QuestionController::class, 'link'])->name('questions.link');
     });
 
-    // Responder às perguntas
-    Route::prefix('survey')->group(function () {
-        Route::get('/{id}', [SurveyController::class, 'show'])->name('survey.show');
-        Route::post('/{id}', [SurveyController::class, 'store'])->name('survey.store');
-    });
+    Route::get('/questions/create', [QuestionController::class, 'create'])->name('questions.create');
+    Route::post('/questions', [QuestionController::class, 'store'])->name('questions.store');
+    Route::get('/questions/{id}/edit', [QuestionController::class, 'edit'])->name('questions.edit');
+    Route::patch('/questions/{id}', [QuestionController::class, 'update'])->name('questions.update');
+    Route::delete('/questions/{id}', [QuestionController::class, 'destroy'])->name('questions.destroy');
+    Route::post('/responses', [QuestionController::class, 'storeSurvey'])->name('responses.store');
+
 });

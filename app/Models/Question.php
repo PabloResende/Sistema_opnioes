@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Response;
+
 
 class Question extends Model
 {
@@ -13,4 +15,9 @@ class Question extends Model
         'title',
         'description',
     ];
+
+    public function responses()
+    {
+        return $this->hasMany(Response::class);
+    }
 }

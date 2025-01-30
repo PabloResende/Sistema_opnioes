@@ -28,9 +28,6 @@
                     <a href="{{ route('statistics') }}" class="nav-link text-white"><i class="bi bi-bar-chart me-2"></i> Estatísticas (não está pronto)</a>
                 </li>
                 <li class="nav-item my-2">
-                    <a href="{{ route('responses') }}" class="nav-link text-white"><i class="bi bi-chat-left-text me-2"></i> Respostas (não esta pronto)</a>
-                </li>
-                <li class="nav-item my-2">
                     <a href="{{ route('notifications') }}" class="nav-link text-white"><i class="bi bi-bell me-2"></i> Notificações (não está pronto)</a>
                 </li>
                 <li class="nav-item my-2">

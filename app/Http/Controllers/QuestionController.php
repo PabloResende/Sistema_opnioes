@@ -3,18 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Models\Response;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
-    // Formulário para criar perguntas
     public function create()
     {
         $questions = Question::all();
         return view('questions.create', compact('questions'));
     }
 
-    // Armazenar perguntas no banco
     public function store(Request $request)
     {
         $request->validate([
@@ -30,20 +29,9 @@ class QuestionController extends Controller
         return redirect()->route('questions.create')->with('success', 'Pergunta criada com sucesso!');
     }
 
-    public function link()
-        {
-            $questions = Question::all();
-
-            return view('questions.link', compact('questions'));
-        }
-    public function index()
-        {
-            return view('index');
-        }
-
     public function edit($id)
     {
-        $question = Question::findOrFail($id); // Encontra a pergunta pelo ID ou retorna 404
+        $question = Question::findOrFail($id);
         return view('questions.edit', compact('question'));
     }
 
@@ -71,4 +59,16 @@ class QuestionController extends Controller
         return redirect()->route('questions.create')->with('success', 'Pergunta excluída com sucesso!');
     }
 
+    public function storeSurvey(Request $request)
+    {
+        foreach ($request->input('responses') as $questionId => $response) {
+            Response::create([
+                'question_id' => $questionId,
+                'rating' => $response['rating'],
+                'opinion' => $response['opinion'] ?? null,
+            ]);
+        }
+
+        return redirect()->route('questions.create')->with('success', 'Respostas enviadas com sucesso!');
+    }
 }

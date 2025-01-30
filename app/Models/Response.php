@@ -1,24 +1,22 @@
 <?php
-// app/Models/Answer.php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Answer extends Model
+class Response extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['question_id', 'user_id', 'content'];
+    protected $fillable = [
+        'question_id',
+        'rating',
+        'opinion',
+    ];
 
     public function question()
     {
         return $this->belongsTo(Question::class);
     }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 }
-
