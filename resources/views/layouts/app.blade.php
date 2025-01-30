@@ -11,11 +11,41 @@
 
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #343a40;
+            color: white;
+            z-index: 1050; /* Certifique-se de que a sidebar esteja acima do conteúdo */
+            padding-top: 20px;
+        }
+
+        .main-content {
+            margin-left: 250px; /* Para empurrar o conteúdo para a direita, depois da sidebar */
+            flex-grow: 1;
+            padding: 20px;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+        }
+    </style>
 </head>
-<body class="d-flex">
+<body>
+
     @if (!Route::is('login','register')) <!-- Verifica se a rota não é a de login -->
         <!-- Sidebar -->
-        <nav class="d-flex flex-column bg-dark text-white p-3 vh-100" style="width: 250px;">
+        <nav class="sidebar">
             <h4 class="text-center">Menu</h4>
             <ul class="nav flex-column">
                 <li class="nav-item my-2">
@@ -38,7 +68,7 @@
     @endif
 
     <!-- Main Content -->
-    <div class="flex-grow-1 p-4 bg-light">
+    <div class="main-content">
         @yield('content')
     </div>
 
