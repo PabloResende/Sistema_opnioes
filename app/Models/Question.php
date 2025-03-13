@@ -14,7 +14,13 @@ class Question extends Model
     protected $fillable = [
         'title',
         'description',
+        'response_types',
     ];
+
+    protected $casts = [
+        'response_types' => 'array',
+    ];
+
 
     public function responses()
     {

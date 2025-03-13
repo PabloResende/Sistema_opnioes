@@ -19,15 +19,25 @@ class QuestionController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string|max:1000',
+            'response_types' => 'required|array',
+            'response_types.*' => 'in:stars,radio,comment',
         ]);
 
         Question::create([
             'title' => $request->title,
             'description' => $request->description,
+            'response_types' => json_encode($request->response_types),
         ]);
 
         return redirect()->route('questions.create')->with('success', 'Pergunta criada com sucesso!');
     }
+
+    public function index()
+{
+    $questions = Question::all();
+    return view('questions.index', compact('questions'));
+}
+
 
     public function edit($id)
     {
@@ -48,7 +58,7 @@ class QuestionController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('questions.create')->with('success', 'Pergunta atualizada com sucesso!');
+        return redirect()->route('questions.index')->with('success', 'Pergunta atualizada com sucesso!');
     }
 
     public function destroy($id)
@@ -56,7 +66,7 @@ class QuestionController extends Controller
         $question = Question::findOrFail($id);
         $question->delete();
 
-        return redirect()->route('questions.create')->with('success', 'Pergunta excluída com sucesso!');
+        return redirect()->route('questions.index')->with('success', 'Pergunta excluída com sucesso!');
     }
 
     public function storeSurvey(Request $request)
@@ -69,6 +79,11 @@ class QuestionController extends Controller
             ]);
         }
 
-        return redirect()->route('questions.create')->with('success', 'Respostas enviadas com sucesso!');
+        return redirect()->route('responses.index')->with('success', 'Respostas enviadas com sucesso!');
     }
+
+    public function responses()
+    {
+        return $this->hasMany(Response::class);
+    }  
 }
