@@ -18,19 +18,20 @@ class QuestionController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string|max:1000',
+            'description' => 'nullable|string',
             'response_types' => 'required|array',
-            'response_types.*' => 'in:stars,radio,comment',
         ]);
 
         Question::create([
             'title' => $request->title,
             'description' => $request->description,
             'response_types' => json_encode($request->response_types),
+            'user_id' => auth()->id(),
         ]);
 
-        return redirect()->route('questions.create')->with('success', 'Pergunta criada com sucesso!');
+        return redirect()->back()->with('success', 'Pergunta criada com sucesso!');
     }
+
 
     public function index()
 {
@@ -85,5 +86,5 @@ class QuestionController extends Controller
     public function responses()
     {
         return $this->hasMany(Response::class);
-    }  
+    }
 }
