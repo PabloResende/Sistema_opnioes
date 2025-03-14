@@ -18,17 +18,16 @@
                     @endphp
 
                     @foreach($responseTypes as $type)
-            @if($type === 'stars')
-    <div class="star-rating">
-        @for($i = 5; $i >= 1; $i--)
-            <input type="radio" id="star{{ $question->id }}_{{ $i }}" name="responses[{{ $question->id }}][rating]" value="{{ $i }}" />
-            <label for="star{{ $question->id }}_{{ $i }}" class="star">
-                <i class="fas fa-star"></i>
-            </label>
-        @endfor
-    </div>
-@endif
-
+                        @if($type === 'stars')
+                            <div class="star-rating">
+                                @for($i = 5; $i >= 1; $i--)
+                                    <input type="radio" id="star{{ $question->id }}_{{ $i }}" name="responses[{{ $question->id }}][rating]" value="{{ $i }}" />
+                                    <label for="star{{ $question->id }}_{{ $i }}" class="star">
+                                        <i class="fas fa-star"></i>
+                                    </label>
+                                @endfor
+                            </div>
+                        @endif
                         @if($type === 'radio')
                             <div>
                                 <input type="radio" name="responses[{{ $question->id }}][radio]" value="Muito Ruim"> Muito Ruim
