@@ -12,7 +12,8 @@ class Response extends Model
     protected $fillable = [
         'question_id',
         'rating',
-        'opinion',
+        'radio',   
+        'comment',
     ];
 
     public function question()

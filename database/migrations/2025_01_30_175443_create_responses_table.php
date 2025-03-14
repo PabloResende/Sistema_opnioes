@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('responses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('question_id')->constrained()->onDelete('cascade');
-            $table->integer('rating');
+            $table->integer('rating')->nullable()->change();
             $table->timestamps();
         });
     }

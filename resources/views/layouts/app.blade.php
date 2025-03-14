@@ -49,23 +49,24 @@
 
     @if (!Route::is('login','register'))
         <!-- Sidebar -->
-        <nav class="sidebar">
-            <h4 class="text-center">Menu</h4>
-            <ul class="nav flex-column">
-                <li class="nav-item my-2">
-                    <a href="{{ route('dashboard') }}" class="nav-link text-white"><i class="bi bi-house me-2"></i> Home</a>
-                </li>
-                <li class="nav-item my-2">
-                    <a href="{{ route('questions.create') }}" class="nav-link text-white"><i class="bi bi-question-circle me-2"></i>Criar Questionário</a>
-                </li>
-                <li class="nav-item my-2">
-                    <a href="{{ route('responses.index') }}" class="nav-link text-white"><i class="bi bi-bell me-2">Responder Questionário</i></a>
-                </li>
-                <li class="nav-item my-2">
-                    <a href="{{ route('questions.index') }}" class="nav-link text-white"><i class="bi bi-bar-chart me-2"></i>Questionário e Respostas</a>
-                </li>
-            </ul>
-        </nav>
+    <nav class="sidebar">
+        <h4 class="text-center">Menu</h4>
+        <ul class="nav flex-column">
+            <li class="nav-item my-2">
+                <a href="{{ route('dashboard') }}" class="nav-link text-white"><i class="bi bi-house me-2"></i> Home</a>
+            </li>
+            <li class="nav-item my-2">
+                <a href="{{ route('questions.create') }}" class="nav-link text-white"><i class="bi bi-pencil-square me-2"></i> Criar Questionário</a>
+            </li>
+            <li class="nav-item my-2">
+                <a href="{{ route('responses.index') }}" class="nav-link text-white"><i class="bi bi-ui-checks me-2"></i> Responder Questionário</a>
+            </li>
+            <li class="nav-item my-2">
+                <a href="{{ route('questions.index') }}" class="nav-link text-white"><i class="bi bi-list-check me-2"></i> Questionário e Respostas</a>
+            </li>
+        </ul>
+    </nav>
+
     @endif
 
     <!-- Main Content -->

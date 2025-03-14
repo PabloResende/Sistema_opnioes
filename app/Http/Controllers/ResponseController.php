@@ -4,33 +4,36 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Response;
-use App\Models\Question; // Certifique-se de incluir o modelo Question
+use App\Models\Question;
 
 class ResponseController extends Controller
 {
     public function index()
     {
-        // Buscando todas as perguntas
         $questions = Question::all();
-
-        // Buscando todas as respostas se necessário
         $responses = Response::with('question')->get();
-
-        // Retornando a view
         return view('responses.index', compact('questions', 'responses'));
-    }  
-
+    }
     public function store(Request $request)
     {
-        $response = new Response();
-        $response->question_id = $request->question_id;
-        $response->rating = $request->rating ?? null;
-        $response->radio = $request->radio ?? null;
-        $response->comment = $request->comment ?? null;
-        $response->save();
+        $responses = $request->input('responses', []);
 
-        return redirect()->route('responses.index')->with('success', 'Resposta enviada com sucesso!');
+        foreach ($responses as $questionId => $responseData) {
+            $rating = $responseData['rating'] ?? null;
+            $radio = $responseData['radio'] ?? null;
+            $comment = isset($responseData['comment']) && !empty(trim($responseData['comment'])) ? $responseData['comment'] : null;
+
+            if ($rating !== null || $radio !== null || $comment !== null) {
+                Response::create([
+                    'question_id' => $questionId,
+                    'rating' => $rating,
+                    'radio' => $radio,
+                    'comment' => $comment,
+                ]);
+            }
+        }
+
+        return redirect()->back()->with('success', 'Respostas enviadas com sucesso!');
     }
-
 
 }
